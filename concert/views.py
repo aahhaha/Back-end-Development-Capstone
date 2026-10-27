@@ -41,6 +41,8 @@ def service_data(request, setting, default, endpoint):
 
 def songs(request):
     data = service_data(request, 'SONGS_SERVICE_URL', 'http://127.0.0.1:8080', '/song')
+    if isinstance(data, dict):
+        data = data.get('songs', [])
     return render(request, 'songs.html', {'songs': data})
 
 def photos(request):

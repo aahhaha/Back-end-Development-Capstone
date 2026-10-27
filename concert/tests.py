@@ -11,7 +11,7 @@ class ConcertViewsTests(TestCase):
 
     @patch('concert.views.requests.get')
     def test_microservice_pages(self, get):
-        get.return_value.json.return_value = [{'id': 1, 'title': 'Example', 'lyrics': 'Lyrics'}]
+        get.return_value.json.return_value = {'songs': [{'id': 1, 'title': 'Example', 'lyrics': 'Lyrics'}]}
         self.assertContains(self.client.get('/songs/'), 'Example')
         get.return_value.json.return_value = [{'pic_url': '/static/images/img.jpeg', 'event_date': '2030-01-01', 'event_city': 'Astana'}]
         self.assertContains(self.client.get('/photos/'), 'Astana')
